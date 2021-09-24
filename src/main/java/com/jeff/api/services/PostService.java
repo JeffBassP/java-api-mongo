@@ -14,18 +14,21 @@ import com.jeff.api.services.exception.ObjectNotFoundException;
 public class PostService {
 
 	@Autowired
-	private PostRepository userRepository;
+	private PostRepository postRepository;
 
 	public List<Post> findAll() {
 
-		return userRepository.findAll();
+		return postRepository.findAll();
 	}
 
 	public Post findById(String id) {
-		Optional<Post> user = userRepository.findById(id);
+		Optional<Post> post = postRepository.findById(id);
 
-		return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+		return post.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 	
+	public List<Post> findByTitle(String text){
+		return postRepository.searchByTitle(text);
+	}
 	
 }
